@@ -23,7 +23,16 @@ while True:
     dil_frame = cv2.dilate(thresh_frame,None,iterations=2)
     cv2.imshow("video", dil_frame)
 
+    contors, check = cv2.findContours(dil_frame, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+    for contor in contors:
+        if cv2.contourArea(contor) < 10000:
+            continue
+        x, y, w, h = cv2.boundingRect(contor)
+        rectangle = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
+
+        if rectangle.any():
+            send_email()
 
     cv2.imshow("Updated_video",frame)
 
