@@ -14,9 +14,11 @@ status_list=[]
 count = 1
 
 def clean_folder():
+    print("Clean folder started ")
     images = glob.glob("images/*png")
     for i in images :
         os.remove(i)
+    print("Clean folder ended ")
 
 while True:
     status=0
@@ -59,7 +61,7 @@ while True:
         email_thread.daemon = True
 
         clean_thread= Thread(target=clean_folder)
-        clean_thread.daemon=True
+        email_thread.daemon=True
 
         email_thread.start()
 

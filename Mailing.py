@@ -8,6 +8,7 @@ password = os.getenv("PASSWORD")
 email_receiver="phanivikash@gmail.com"
 
 def send_email(image_path):
+    print("Email Thread started ")
     email_message=EmailMessage()
     email_message["Subject"]= "New object Entered "
     email_message.set_content("Hey New object detected in the frame ")
@@ -23,6 +24,7 @@ def send_email(image_path):
     gmail.login(email_sender,password=password)
     gmail.sendmail(email_sender,email_receiver,email_message.as_string())
     gmail.quit()
+    print("Email Thread ended ")
 
 '''if __name__ is "__main__":
     send_email(image_path="gen2.png")'''
